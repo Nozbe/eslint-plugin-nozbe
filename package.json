@@ -8,12 +8,10 @@
   },
   "keywords": [
     "eslint",
-    "eslint",
-    "plugin",
+    "eslint-plugin",
     "nozbe",
     "react",
-    "react",
-    "native",
+    "react-native",
     "jsx"
   ],
   "author": "Nozbe",

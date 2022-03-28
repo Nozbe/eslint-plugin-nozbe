@@ -1,0 +1,21 @@
+{
+  "name": "@nozbe/eslint-plugin-nozbe",
+  "version": "1.0.0",
+  "description": "Helpful React/React Native eslint rules, by Nozbe",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "eslint",
+    "plugin",
+    "nozbe",
+    "react",
+    "react",
+    "native",
+    "jsx"
+  ],
+  "author": "Nozbe",
+  "license": "MIT"
+}

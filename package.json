@@ -15,5 +15,14 @@
     "jsx"
   ],
   "author": "Nozbe",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nozbe/eslint-plugin-nozbe.git"
+  },
+  "homepage": "https://github.com/Nozbe/eslint-plugin-nozbe#readme",
+  "bugs": "https://github.com/Nozbe/eslint-plugin-nozbe/issues"
 }

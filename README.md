@@ -56,7 +56,7 @@ This raises an error when spread is used on a call expression, like so:
 someFunction(...args)
 ```
 
-This isn't something you generally need to enable for a whole project. However, you should be aware that spreading very large arrays (tens of thousands of elements) can cause a "RangeError: Maximum call stack size exceeded" error. In such cases, you should pass the array as a single argument instead.
+This isn't something you generally need to enable for a whole project. However, you should be aware that spreading very large arrays (tens of thousands of elements) can cause a "RangeError: Maximum call stack size exceeded" error. In such cases, [you should pass the array as a single argument](https://twitter.com/radexp/status/1638195031881252868) instead.
 
 ## No optional catch binding
 

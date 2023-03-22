@@ -114,3 +114,51 @@ import * as Foo from 'bar'
 ```
 
 In some cases, you might want to ensure that namespaced imports aren't used in a project or in specific files as to not balloon bundle or chunk size.
+
+## Flow: No shorthand exact objects
+
+```js
+  rules: [
+    '@nozbe/nozbe/flow-no-shorthand-exact-object': 'error',
+  ]
+```
+
+This raises an error when shorthand exact objects are used:
+
+```js
+const foo: {| a: true |}
+```
+
+This syntax breaks VS Code's code coloring unfortunately...
+
+This auto-fixes to:
+
+```js
+const foo: $Exact<{ a: true }>
+```
+
+## Flow: No ambiguous object exactness
+
+```js
+  rules: [
+    '@nozbe/nozbe/flow-no-ambiguous-object-exactness': [
+      'error',
+      { exactByDefault: false }
+    ],
+  ]
+```
+
+This raises an error when ambiguous objects (not explicitly exact or inexact) are used, except for indexed objects:
+
+```js
+// bad:
+const foo: { a: true }
+
+// good:
+const foo: {| a: true |}
+const foo: $Exact<{ a: true }>
+const foo: { a: true, ... }
+const foo: { [string]: boolean }
+```
+
+The problem with ambiguous object exactness is that Flow is in the process of migrating from "inexact objects by default" to "exact objects by default", and until this migration is complete, different users can have objects configured differently. This can be confusing, it makes it hard to migrate from inexact to exact objects, and is particularly a problem if you are shipping a library using Flow (e.g. [WatermelonDB](https://github.com/Nozbe/WatermelonDB)), since its users can have different Flow configurations.

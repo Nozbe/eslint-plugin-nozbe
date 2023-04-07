@@ -174,3 +174,58 @@ This auto-fixes to:
 ```js
 const foo: $Exact<{ a: true }>
 ```
+
+## Max lines
+
+```js
+  rules: [
+    '@nozbe/nozbe/max-lines': [
+      'warn',
+      { max: 600 }
+    ],
+  ]
+```
+
+This rule disallows file longer than `max` lines.
+
+This is very similar to ESLint's builtin `max-lines` rule. The main difference is that `max-lines`
+will highlight all offending lines red/yellow in your IDE, which is very annoying. `@nozbe/nozbe/max-lines`
+will only highlight the top line, in addition to producing a message in eslint output.
+
+This is good when you don't want to enforce this rule as an error, merely a warning - something to be
+dealt with at the nearest convenience, not something you have to drop everything you're doing to fix.
+IMO, the official rule's behavior encourages the developer to just silence the error for the whole file,
+which defeats the point.
+
+## No `invariant()` without message
+
+```js
+  rules: [
+    '@nozbe/nozbe/no-invariant-without-message': 'error',
+  ]
+```
+
+This rule disallows `invariant()` to be called without the second parameter, enforcing that errors thrown must
+produce a helpful message.
+
+```js
+// bad:
+invariant(someCondition)
+
+// good:
+invariant(someCondition, 'Some condition was not met!')
+```
+
+## No `in` expressions
+
+```js
+  rules: [
+    '@nozbe/nozbe/no-in-expression': 'error',
+  ]
+```
+
+This rule disallows `'foo' in bar` expressions. These expressions can easily produce the wrong (potentially
+unsafe) behavior if you're not careful (e.g. `'toString' in {}` is `true`; also inheritance, etc.)
+
+You probably want to have in your project a convenient shortcut to `Object.prototype.hasOwnProperty.call(obj, prop)` which has
+a less error-prone behavior.

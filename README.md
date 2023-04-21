@@ -44,6 +44,51 @@ This auto-fixes to:
 </>
 ```
 
+## No overdue TODOs/FIXMEs
+
+```
+  rules: [
+    '@nozbe/nozbe/no-overdue-todos': 'warn',
+  ]
+```
+
+This turns `TODO:` and `FIXME:` comments into a warning after a specified date, for example:
+
+```js
+// date given in yyyy-mm-dd format, but days and months can be omitted
+
+// TODO(2024): Refactor X after Y is done
+// FIXME(2023-03): Fix A once B is released
+// TODO(2023-04-20): Remove this deprecation once version a.b.c is out
+```
+
+BTW: It can be helpful to set up your editor to highlight these comments. For example, for VS Code, use [TODO Highlight v2](https://marketplace.visualstudio.com/items?itemName=jgclark.vscode-todo-highlight) with this configuration:
+
+```json5
+"todohighlight.keywords": [
+  {
+    "text": "TODO(string):",
+    "regex": {
+      "pattern": "(?<=^|\"|\\s)TODO(\\([^)]+\\))?:"
+    },
+    "color": "#fff",
+    "backgroundColor": "#ffbd2a",
+    "overviewRulerColor": "rgba(255,189,42,0.8)",
+    "diagnosticSeverity": "error"
+  },
+  {
+    "text": "FIXME(string):",
+    "regex": {
+      "pattern": "(?<=^|\"|\\s)FIXME(\\([^)]+\\))?:"
+    },
+    "color": "#fff",
+    "backgroundColor": "#f06292",
+    "overviewRulerColor": "rgba(240,98,146,0.8)",
+    "diagnosticSeverity": "warning"
+  }
+]
+```
+
 ## No argument spread
 
 ```

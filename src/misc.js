@@ -81,4 +81,41 @@ module.exports = {
       };
     },
   },
+  "no-overdue-todos": {
+    create(context) {
+      return {
+        Program(_node) {
+          context
+            .getSourceCode()
+            .getAllComments()
+            .forEach((comment) => {
+              const match = comment.value.match(/(TODO|FIXME)\(([^)]+)\):/);
+              if (!match) {
+                return;
+              }
+              const [, , dateText] = match;
+              const dateMatch = dateText.match(
+                /(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/
+              );
+              if (!dateMatch) {
+                return;
+              }
+              const [, yearStr, monthStr, dayStr] = dateMatch;
+              const [year, month, day] = [yearStr, monthStr, dayStr].map(
+                (str) => parseInt(str, 10) || 1
+              );
+              const dayOverdue = new Date(year, month - 1, day);
+
+              if (dayOverdue < new Date()) {
+                context.report({
+                  node: null,
+                  loc: comment.loc,
+                  message: `Overdue ${comment.value.trim()}`,
+                });
+              }
+            });
+        },
+      };
+    },
+  },
 };

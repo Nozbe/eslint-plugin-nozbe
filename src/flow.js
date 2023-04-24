@@ -1,5 +1,8 @@
 module.exports = {
   'flow-no-shorthand-exact-object': {
+    meta: {
+      fixable: 'code',
+    },
     create(context) {
       return {
         ObjectTypeAnnotation(node) {
@@ -20,6 +23,9 @@ module.exports = {
     },
   },
   'flow-no-ambiguous-object-exactness': {
+    meta: {
+      fixable: 'code',
+    },
     create(context) {
       const flags = context.options[0] || {}
       const { exactByDefault } = flags
